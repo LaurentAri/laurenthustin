@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio BTS SIO - SISR | Laurent HUSTIN</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.15);
+            z-index: 1000;
+            padding: 0.8rem 0;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1.5rem;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .nav-brand {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            padding: 0.5rem 0.9rem;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+        }
+
+        .nav-btn.highlight {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .nav-btn.highlight:hover {
+            background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
+        }
+
+        .content {
+            max-width: 1200px;
+            margin: 90px auto 2rem;
+            padding: 0 1.5rem;
+        }
+
+        .section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+            font-size: 2.2rem;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 0.5rem;
+        }
+
+        h2 {
+            color: #764ba2;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            color: #667eea;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .info-card {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .project-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+        }
+
+        .project-card.stadium {
+            border-left: 5px solid #28a745;
+        }
+
+        .project-card.enova {
+            border-left: 5px solid #fd7e14;
+        }
+
+        .competence-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        .competence-table th,
+        .competence-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border: 1px solid #dee2e6;
+        }
+
+        .competence-table th {
+            background: #667eea;
+            color: white;
+        }
+
+        .competence-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .check { color: #28a745; font-weight: bold; }
+
+        .tech-tag {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            margin: 0.2rem;
+            font-size: 0.85rem;
+        }
+
+        .pdf-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .pdf-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: 0.5rem;
+        }
+
+        .badge-stadium { background: #d4edda; color: #155724; }
+        .badge-enova { background: #fff3cd; color: #856404; }
+        .badge-veille { background: #f8d7da; color: #721c24; }
+
+        .context-box {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-left: 5px solid #667eea;
+        }
+
+        .contact-form {
+            display: grid;
+            gap: 1rem;
+            max-width: 600px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 0.75rem;
+            border: 2px solid #e9ecef;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            padding: 1rem 2rem;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: #764ba2;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container { justify-content: center; }
+            .nav-buttons { justify-content: center; }
+            h1 { font-size: 1.8rem; }
+            .nav-btn { padding: 0.4rem 0.7rem; font-size: 0.75rem; }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.classList.remove('active'));
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) targetSection.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function handleSubmit(e) {
+            e.preventDefault();
+            alert('Merci pour votre message ! Je vous répondrai sous 24-48h.');
+        }
+    </script>
+
+    <nav>
+        <div class="nav-container">
+            <div class="nav-brand">🎓 Portfolio BTS SIO</div>
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="showSection('presentation')">Présentation</button>
+                <button class="nav-btn" onclick="showSection('bts')">BTS SIO SISR</button>
+                <button class="nav-btn" onclick="showSection('e5')">Épreuve E5</button>
+                <button class="nav-btn" onclick="showSection('e6')">Épreuve E6</button>
+                <button class="nav-btn" onclick="showSection('veille')">Veille Technologique</button>
+                <button class="nav-btn" onclick="showSection('competences')">Compétences</button>
+                <button class="nav-btn" onclick="showSection('contact')">Contact</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="content">
+        <!-- Section Présentation -->
+        <div id="presentation" class="section active">
+            <h1>👤 Présentation Personnelle</h1>
+            
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>Identité</h3>
+                    <p><strong>Nom :</strong> HUSTIN</p>
+                    <p><strong>Prénom :</strong> Laurent</p>
+                    <p><strong>Formation :</strong> BTS SIO SISR 2ème année</p>
+                    <p><strong>Statut :</strong> Alternance</p>
+                </div>
+                <div class="info-card">
+                    <h3>Entreprise d'alternance</h3>
+                    <p><strong>🏢 E-Nova (E-NOVACORP)</strong></p>
+                    <p>SAS - Paris 18ème</p>
+                    <p>Gestion, distribution et reconditionnement IT</p>
+                </div>
+            </div>
+
+            <h2>🎓 Parcours Scolaire</h2>
+            <div class="project-card">
+                <h3>BTS SIO Option SISR</h3>
+                <p><strong>Années :</strong> 2025 - 2026</p>
+                <p><strong>Modalité :</strong> Alternance chez E-Nova</p>
+            </div>
+
+            <h2>💼 Parcours Professionnel</h2>
+            <div class="project-card enova">
+                <h3>Alternance - E-Nova</h3>
+                <p><strong>Période :</strong> 2025 - Aujourd'hui</p>
+                <p><strong>Tuteur :</strong> Maxence Debuire</p>
+                <p><strong>Présentation de l'entreprise :</strong></p>
+                <p>E-Nova (E-NOVACORP) est une SAS créée en 2021, spécialisée dans la gestion, la distribution et les services autour du matériel informatique pour les entreprises. L'entreprise est située au 7 rue des Cottages à Paris (75018).</p>
+                <p><strong>Activités principales :</strong></p>
+                <ul>
+                    <li>Achat, vente et distribution de matériel informatique</li>
+                    <li>Solutions de gestion de parc IT en leasing</li>
+                    <li>Reprise, reconditionnement et recyclage de matériel</li>
+                    <li>Plateforme de gestion centralisée (onboarding, déploiement, gestion des licences)</li>
+                </ul>
+                <p><strong>Mes missions :</strong></p>
+                <ul>
+                    <li>Reconditionnement d'ordinateurs (diagnostic, réparation, réinstallation OS)</li>
+                    <li>SAV et support technique (écran, batterie, carte mère, ports USB)</li>
+                    <li>Enrollment d'appareils via MDM (Miradore)</li>
+                    <li>Configuration réseau (VLAN)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Section BTS SIO -->
+        <div id="bts" class="section">
+            <h1>📚 Le BTS SIO - Option SISR</h1>
+            
+            <h2>Présentation du BTS SIO</h2>
+            <p>Le BTS Services Informatiques aux Organisations forme des techniciens supérieurs capables de gérer et d'administrer les systèmes et réseaux informatiques d'une organisation.</p>
+
+            <h2>L'Option SISR</h2>
+            <p><strong>Solutions d'Infrastructure, Systèmes et Réseaux</strong></p>
+            
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>🔧 Administration Systèmes</h3>
+                    <p>Windows Server, Linux, Active Directory, GPO</p>
+                </div>
+                <div class="info-card">
+                    <h3>🌐 Réseaux</h3>
+                    <p>TCP/IP, VLAN, VPN, DNS, DHCP, Routage Cisco</p>
+                </div>
+                <div class="info-card">
+                    <h3>🔒 Cybersécurité</h3>
+                    <p>Pare-feu, IDS/IPS, Sauvegardes, Supervision</p>
+                </div>
+                <div class="info-card">
+                    <h3>☁️ Virtualisation</h3>
+                    <p>VMware ESXi, Hyper-V, Proxmox</p>
+                </div>
+            </div>
+
+            <h2>Les Épreuves</h2>
+            <div class="project-card">
+                <h3>📋 Épreuve E5 - Administration des systèmes et des réseaux</h3>
+                <p>Présentation des réalisations professionnelles effectuées en formation et en entreprise.</p>
+                <p><strong>Coefficient :</strong> 4</p>
+            </div>
+            <div class="project-card">
+                <h3>📋 Épreuve E6 - Parcours de professionnalisation</h3>
+                <p>Épreuve pratique portant sur le parcours de professionnalisation et l'administration des solutions d'infrastructure.</p>
+                <p><strong>Coefficient :</strong> 4</p>
+            </div>
+            <div class="project-card">
+                <h3>📋 Épreuve E7 - Cybersécurité des services informatiques</h3>
+                <p>Épreuve écrite évaluant les compétences en matière de cybersécurité : protection des systèmes, gestion des risques et mise en œuvre de solutions de sécurité.</p>
+                <p><strong>Coefficient :</strong> 4</p>
+            </div>
+        </div>
+
+        <!-- Section E5 -->
+        <div id="e5" class="section">
+            <h1>📋 Épreuve E5 - Réalisations Professionnelles</h1>
+            
+            <div class="context-box">
+                <h3>📌 Contexte de formation : StadiumCompany</h3>
+                <p><strong>StadiumCompany</strong> est une entreprise de gestion de stade (170 employés, 3 sites). 
+                Les projets ci-dessous ont été réalisés dans ce contexte pédagogique.</p>
+            </div>
+
+            <div class="project-card">
+                <h3>📎 Tableau de synthèse des réalisations professionnelles</h3>
+                <p>Document officiel récapitulatif des réalisations professionnelles et des compétences mises en œuvre dans le cadre de l'épreuve E5.</p>
+                <a href="pdf/Tableau_Synthese_E5_2025.xlsx" class="pdf-btn" download>📥 Télécharger le Tableau de Synthèse (Excel)</a>
+            </div>
+
+            <h2>🏟️ Projets StadiumCompany (Formation)</h2>
+
+            <!-- Projet AD/DHCP/DNS -->
+            <div class="project-card stadium">
+                <h3>🖥️ Active Directory, DHCP et DNS <span class="badge badge-stadium">StadiumCompany</span></h3>
+                <p><strong>Contexte :</strong> Mission 2 - Infrastructure et Services Informatiques</p>
+                <p><strong>Objectifs :</strong></p>
+                <ul>
+                    <li>Déploiement d'Active Directory (domaine stadiumcompany.com)</li>
+                    <li>Configuration DHCP en failover (Kratos1/Kratos2)</li>
+                    <li>Service DNS avec zones directe et inversée</li>
+                    <li>Création des Unités Organisationnelles et GPO</li>
+                </ul>
+                <p><strong>Technologies :</strong></p>
+                <div>
+                    <span class="tech-tag">Windows Server 2022</span>
+                    <span class="tech-tag">Active Directory</span>
+                    <span class="tech-tag">DHCP</span>
+                    <span class="tech-tag">DNS</span>
+                    <span class="tech-tag">GPO</span>
+                    <span class="tech-tag">PowerShell</span>
+                </div>
+                <a href="pdf/Projet_AD_DHCP_DNS_StadiumCompany.pdf" class="pdf-btn" download>📄 Télécharger le PDF</a>
+            </div>
+
+            <!-- Projet VLAN/HSRP -->
+            <div class="project-card stadium">
+                <h3>🌐 VLAN, Routage Inter-VLAN, STP, EtherChannel et HSRP <span class="badge badge-stadium">StadiumCompany</span></h3>
+                <p><strong>Contexte :</strong> Mission 4 - Redondance et Haute Disponibilité</p>
+                <p><strong>Objectifs :</strong></p>
+                <ul>
+                    <li>Segmentation réseau avec VLANs (Administration, Équipes, WiFi, DMZ)</li>
+                    <li>Routage inter-VLAN (Router-on-a-Stick)</li>
+                    <li>Agrégation de liens avec EtherChannel/LACP</li>
+                    <li>Redondance de passerelle avec HSRP</li>
+                </ul>
+                <p><strong>Technologies :</strong></p>
+                <div>
+                    <span class="tech-tag">Cisco</span>
+                    <span class="tech-tag">VLAN</span>
+                    <span class="tech-tag">802.1Q</span>
+                    <span class="tech-tag">STP</span>
+                    <span class="tech-tag">EtherChannel</span>
+                    <span class="tech-tag">HSRP</span>
+                </div>
+                <a href="pdf/Mission_VLAN_Routage_STP_EtherChannel_HSRP_StadiumCompany.pdf" class="pdf-btn" download>📄 Télécharger le PDF</a>
+            </div>
+
+            <!-- Projet Zimbra -->
+            <div class="project-card stadium">
+                <h3>📧 Messagerie Zimbra <span class="badge badge-stadium">StadiumCompany</span></h3>
+                <p><strong>Contexte :</strong> Mission 2 - Services Informatiques</p>
+                <p><strong>Objectifs :</strong></p>
+                <ul>
+                    <li>Déploiement de Zimbra Collaboration Suite</li>
+                    <li>Configuration DNS (enregistrements A et MX)</li>
+                    <li>Administration et création des comptes utilisateurs</li>
+                    <li>Intégration à l'infrastructure existante</li>
+                </ul>
+                <p><strong>Technologies :</strong></p>
+                <div>
+                    <span class="tech-tag">Ubuntu Server</span>
+                    <span class="tech-tag">Zimbra</span>
+                    <span class="tech-tag">DNS</span>
+                    <span class="tech-tag">SMTP/IMAP</span>
+                </div>
+                <a href="pdf/Projet_Zimbra_StadiumCompany.pdf" class="pdf-btn" download>📄 Télécharger le PDF</a>
+            </div>
+
+            <!-- Projet GLPI -->
+            <div class="project-card stadium">
+                <h3>🔧 GLPI et FusionInventory <span class="badge badge-stadium">StadiumCompany</span></h3>
+                <p><strong>Contexte :</strong> Mission 7 - Gestion du Parc Informatique</p>
+                <p><strong>Objectifs :</strong></p>
+                <ul>
+                    <li>Déploiement de GLPI pour la gestion des tickets</li>
+                    <li>Intégration FusionInventory pour l'inventaire automatique</li>
+                    <li>Synchronisation avec Active Directory</li>
+                    <li>Configuration des collecteurs e-mails</li>
+                </ul>
+                <p><strong>Technologies :</strong></p>
+                <div>
+                    <span class="tech-tag">Debian</span>
+                    <span class="tech-tag">GLPI</span>
+                    <span class="tech-tag">FusionInventory</span>
+                    <span class="tech-tag">LAMP</span>
+                    <span class="tech-tag">LDAP</span>
+                </div>
+                <a href="pdf/GLPI_StadiumCompany.pdf" class="pdf-btn" download>📄 Télécharger le PDF</a>
+            </div>
+
+            <!-- Projet Apache -->
+            <div class="project-card stadium">
+                <h3>🌐 Serveur Web Apache <span class="badge badge-stadium">StadiumCompany</span></h3>
+                <p><strong>Contexte :</strong> Mission 2 - Infrastructure Web</p>
+                <p><strong>Objectifs :</strong></p>
+                <ul>
+                    <li>Installation et configuration d'Apache2</li>
+                    <li>Configuration des Virtual Hosts</li>
+                    <li>Sécurisation SSL/TLS avec certificats</li>
+                    <li>Intégration PHP (mod_php et PHP-FPM)</li>
+                </ul>
+                <p><strong>Technologies :</strong></p>
+                <div>
+                    <span class="tech-tag">Debian</span>
+                    <span class="tech-tag">Apache2</span>
+                    <span class="tech-tag">SSL/TLS</span>
+                    <span class="tech-tag">PHP</span>
+                </div>
+                <a href="pdf/Projet_Apache2_Portfolio.pdf" class="pdf-btn" download>📄 Télécharger le PDF</a>
+            </div>
+
+            <!-- Portail Captif pfSense -->
+            <div class="project-card stadium">
+                <h3>🔐 Portail Captif pfSense <span class="badge badge-stadium">StadiumCompany</span></h3>
+                <p><strong>Contexte :</strong> Contrôle d'accès pour les utilisateurs internes et invités</p>
+                <p><strong>Objectifs :</strong></p>
+                <ul>
+                    <li>Mise en place d'un portail captif sous pfSense</li>
+                    <li>Authentification des utilisateurs avant accès au réseau</li>
+                    <li>Gestion des sessions et des droits d'accès par profil</li>
+                    <li>Intégration avec Active Directory via RADIUS</li>
+                </ul>
+                <p><strong>Technologies :</strong></p>
+                <div>
+                    <span class="tech-tag">pfSense</span>
+                    <span class="tech-tag">Portail Captif</span>
+                    <span class="tech-tag">RADIUS</span>
+                    <span class="tech-tag">Active Directory</span>
+                </div>
+                <a href="pdf/Portail_Captif_pfSense_StadiumCompany.pdf" class="pdf-btn" download>📥 Télécharger le PDF</a>
+            </div>
+
+            <!-- Supervision Nagios -->
+            <div class="project-card stadium">
+                <h3>📡 Supervision avec Nagios XI <span class="badge badge-stadium">StadiumCompany</span></h3>
+                <p><strong>Contexte :</strong> Mise en place d'une solution de supervision de l'infrastructure StadiumCompany</p>
+                <p><strong>Objectifs :</strong></p>
+                <ul>
+                    <li>Installation et configuration de Nagios XI</li>
+                    <li>Supervision des hôtes, services et équipements réseau</li>
+                    <li>Configuration des alertes et notifications par e-mail</li>
+                    <li>Création de tableaux de bord de monitoring</li>
+                </ul>
+                <p><strong>Technologies :</strong></p>
+                <div>
+                    <span class="tech-tag">Nagios XI</span>
+                    <span class="tech-tag">SNMP</span>
+                    <span class="tech-tag">Supervision réseau</span>
+                    <span class="tech-tag">Linux</span>
+                </div>
+                <a href="pdf/Supervision_Nagios_StadiumCompany.pdf" class="pdf-btn" download>📥 Télécharger le PDF</a>
+            </div>
+
+            <!-- Déploiement WiFi -->
+            <div class="project-card stadium">
+                <h3>📶 Déploiement Solution WiFi <span class="badge badge-stadium">StadiumCompany</span></h3>
+                <p><strong>Contexte :</strong> Accès sans fil pour les utilisateurs mobiles de StadiumCompany</p>
+                <p><strong>Objectifs :</strong></p>
+                <ul>
+                    <li>Installation et configuration des points d'accès Wi-Fi</li>
+                    <li>Segmentation des SSID par profil utilisateur (collaborateurs, invités)</li>
+                    <li>Sécurisation WPA2-Enterprise avec authentification RADIUS</li>
+                    <li>Intégration dans l'infrastructure VLAN existante</li>
+                </ul>
+                <p><strong>Technologies :</strong></p>
+                <div>
+                    <span class="tech-tag">Wi-Fi</span>
+                    <span class="tech-tag">WPA2-Enterprise</span>
+                    <span class="tech-tag">RADIUS</span>
+                    <span class="tech-tag">VLAN</span>
+                    <span class="tech-tag">SSID</span>
+                </div>
+                <a href="pdf/Deploiement_WiFi_StadiumCompany.pdf" class="pdf-btn" download>📥 Télécharger le PDF</a>
+            </div>
+
+            <!-- Solution de Sauvegarde -->
+            <div class="project-card stadium">
+                <h3>💾 Solution de Sauvegarde <span class="badge badge-stadium">StadiumCompany</span></h3>
+                <p><strong>Contexte :</strong> Continuité de service et protection des données de StadiumCompany</p>
+                <p><strong>Objectifs :</strong></p>
+                <ul>
+                    <li>Mise en place d'une stratégie de sauvegarde (règle 3-2-1)</li>
+                    <li>Configuration des sauvegardes automatiques planifiées</li>
+                    <li>Tests de restauration et vérification de l'intégrité des données</li>
+                    <li>Documentation des procédures de reprise d'activité (PRA)</li>
+                </ul>
+                <p><strong>Technologies :</strong></p>
+                <div>
+                    <span class="tech-tag">Sauvegarde</span>
+                    <span class="tech-tag">PRA/PCA</span>
+                    <span class="tech-tag">Restauration</span>
+                    <span class="tech-tag">Windows Server</span>
+                </div>
+                <a href="pdf/Solution_Sauvegarde_StadiumCompany.pdf" class="pdf-btn" download>📥 Télécharger le PDF</a>
+            </div>
+
+            <!-- IDS/IPS Snort -->
+            <div class="project-card stadium">
+                <h3>🛡️ IDS/IPS avec Snort <span class="badge badge-stadium">StadiumCompany</span></h3>
+                <p><strong>Contexte :</strong> Sécurisation avancée de l'infrastructure réseau de StadiumCompany</p>
+                <p><strong>Objectifs :</strong></p>
+                <ul>
+                    <li>Installation et configuration de Snort en mode IDS/IPS</li>
+                    <li>Définition de règles de détection d'intrusion</li>
+                    <li>Analyse des alertes et journaux de sécurité</li>
+                    <li>Intégration avec pfSense pour le blocage automatique</li>
+                </ul>
+                <p><strong>Technologies :</strong></p>
+                <div>
+                    <span class="tech-tag">Snort</span>
+                    <span class="tech-tag">IDS/IPS</span>
+                    <span class="tech-tag">pfSense</span>
+                    <span class="tech-tag">Détection d'intrusion</span>
+                </div>
+                <a href="pdf/IDS_IPS_Snort_StadiumCompany.pdf" class="pdf-btn" download>📥 Télécharger le PDF</a>
+            </div>
+
+            <!-- SEO -->
+            <div class="project-card stadium">
+                <h3>🔍 Référencement SEO du site StadiumCompany <span class="badge badge-stadium">StadiumCompany</span></h3>
+                <p><strong>Contexte :</strong> Optimisation de la présence en ligne de StadiumCompany</p>
+                <p><strong>Objectifs :</strong></p>
+                <ul>
+                    <li>Audit SEO du site web existant</li>
+                    <li>Optimisation des balises meta, titres et descriptions</li>
+                    <li>Amélioration de la structure des URLs et du maillage interne</li>
+                    <li>Mesure de la visibilité avec Google Search Console</li>
+                </ul>
+                <p><strong>Technologies :</strong></p>
+                <div>
+                    <span class="tech-tag">SEO</span>
+                    <span class="tech-tag">Google Search Console</span>
+                    <span class="tech-tag">HTML/CSS</span>
+                    <span class="tech-tag">Référencement web</span>
+                </div>
+                <a href="pdf/SEO_Site_StadiumCompany.pdf" class="pdf-btn" download>📥 Télécharger le PDF</a>
+            </div>
+
+            <!-- LinkedIn Learning -->
+            <div class="project-card stadium">
+                <h3>🎓 Formation LinkedIn Learning <span class="badge badge-veille">Développement professionnel</span></h3>
+                <p><strong>Contexte :</strong> Développement des compétences professionnelles en autonomie</p>
+                <p><strong>Objectifs :</strong></p>
+                <ul>
+                    <li>Suivi de formations certifiantes en administration réseau et cybersécurité</li>
+                    <li>Mise en œuvre des outils et stratégies de veille informationnelle</li>
+                    <li>Consolidation des compétences SISR (Cisco, Windows Server, sécurité)</li>
+                    <li>Gestion et développement de l'identité professionnelle en ligne</li>
+                </ul>
+                <p><strong>Technologies :</strong></p>
+                <div>
+                    <span class="tech-tag">LinkedIn Learning</span>
+                    <span class="tech-tag">E-learning</span>
+                    <span class="tech-tag">Certifications</span>
+                    <span class="tech-tag">Veille</span>
+                </div>
+                <a href="pdf/Formation_LinkedIn_Learning.pdf" class="pdf-btn" download>📥 Télécharger le PDF</a>
+            </div>
+
+            <h2>🏢 Projets E-Nova (Entreprise)</h2>
+
+            <!-- Projet VLAN E-Nova -->
+            <div class="project-card enova">
+                <h3>🌐 Configuration VLAN <span class="badge badge-enova">E-Nova</span></h3>
+                <p><strong>Contexte :</strong> Segmentation du réseau de l'entreprise E-Nova</p>
+                <p><strong>Problématique :</strong> Les PC en traitement (reconditionnement, diagnostic) étaient sur le même réseau que les postes de production, posant des risques de sécurité.</p>
+                <p><strong>Solution mise en place :</strong></p>
+                <ul>
+                    <li>Création de 2 VLAN : Production (commerciaux/admin) et Atelier</li>
+                    <li>Configuration de 2 réseaux Wi-Fi distincts</li>
+                    <li>Isolation des machines potentiellement à risque</li>
+                </ul>
+                <p><strong>Technologies :</strong></p>
+                <div>
+                    <span class="tech-tag">Switch manageable</span>
+                    <span class="tech-tag">VLAN</span>
+                    <span class="tech-tag">Wi-Fi multi-SSID</span>
+                </div>
+                <a href="pdf/Projet_VLAN_E-Nova.pdf" class="pdf-btn" download>📥 Télécharger le PDF</a>
+            </div>
+
+            <!-- Reconditionnement -->
+            <div class="project-card enova">
+                <h3>♻️ Processus de Reconditionnement <span class="badge badge-enova">E-Nova</span></h3>
+                <p><strong>Contexte :</strong> E-Nova propose des services de reprise et reconditionnement de matériel informatique</p>
+                <p><strong>Processus complet :</strong></p>
+                <ul>
+                    <li>Diagnostic des pannes (écran, batterie, carte mère, ports USB...)</li>
+                    <li>Réparation et remplacement des composants défectueux</li>
+                    <li>Effacement sécurisé des données</li>
+                    <li>Réinstallation OS via serveur Linux (ligne de commande bash)</li>
+                    <li>Tests, nettoyage, emballage et expédition</li>
+                </ul>
+                <p><strong>Technologies :</strong></p>
+                <div>
+                    <span class="tech-tag">Hardware</span>
+                    <span class="tech-tag">Linux</span>
+                    <span class="tech-tag">Déploiement OS</span>
+                    <span class="tech-tag">Bash</span>
+                </div>
+                <a href="pdf/Processus_Reconditionnement_E-Nova.pdf" class="pdf-btn" download>📥 Télécharger le PDF</a>
+            </div>
+
+            <!-- SAV/Réparation -->
+            <div class="project-card enova">
+                <h3>🔧 SAV et Réparation <span class="badge badge-enova">E-Nova</span></h3>
+                <p><strong>Contexte :</strong> Support technique et maintenance quotidienne</p>
+                <p><strong>Missions :</strong></p>
+                <ul>
+                    <li>Diagnostic de pannes matérielles</li>
+                    <li>Remplacement de composants (écran, batterie, carte mère, ports USB)</li>
+                    <li>Réinstallation de systèmes d'exploitation</li>
+                    <li>Support utilisateurs</li>
+                </ul>
+                <p><strong>Technologies :</strong></p>
+                <div>
+                    <span class="tech-tag">Hardware</span>
+                    <span class="tech-tag">Windows</span>
+                    <span class="tech-tag">Diagnostic</span>
+                </div>
+                <a href="pdf/SAV_Reparation_E-Nova.pdf" class="pdf-btn" download>📥 Télécharger le PDF</a>
+            </div>
+
+            <!-- Enrollment -->
+            <div class="project-card enova">
+                <h3>📱 Enrollment d'appareils (MDM) <span class="badge badge-enova">E-Nova</span></h3>
+                <p><strong>Contexte :</strong> Gestion de flotte d'appareils pour les clients</p>
+                <p><strong>Objectifs :</strong></p>
+                <ul>
+                    <li>Enrollment des appareils via Miradore (MDM)</li>
+                    <li>Configuration des politiques de sécurité</li>
+                    <li>Déploiement et gestion centralisée des appareils</li>
+                </ul>
+                <p><strong>Technologies :</strong></p>
+                <div>
+                    <span class="tech-tag">Miradore</span>
+                    <span class="tech-tag">MDM</span>
+                    <span class="tech-tag">Gestion de flotte</span>
+                </div>
+                <a href="pdf/Enrollment_MDM_E-Nova.pdf" class="pdf-btn" download>📥 Télécharger le PDF</a>
+            </div>
+
+            <!-- Airtable -->
+            <div class="project-card enova">
+                <h3>📊 Gestion SAV et Stock avec Airtable <span class="badge badge-enova">E-Nova</span></h3>
+                <p><strong>Contexte :</strong> Suivi des interventions SAV et gestion des stocks</p>
+                <p><strong>Utilisation :</strong></p>
+                <ul>
+                    <li>Saisie et suivi des interventions SAV</li>
+                    <li>Gestion des stocks de pièces et matériel</li>
+                    <li>Traçabilité des appareils en réparation</li>
+                </ul>
+                <p><strong>Technologies :</strong></p>
+                <div>
+                    <span class="tech-tag">Airtable</span>
+                    <span class="tech-tag">Gestion de données</span>
+                    <span class="tech-tag">Suivi SAV</span>
+                </div>
+                <a href="pdf/Airtable_SAV_Stock_E-Nova.pdf" class="pdf-btn" download>📥 Télécharger le PDF</a>
+            </div>
+
+            <!-- Nmap -->
+            <div class="project-card enova">
+                <h3>🔍 Scan Réseau avec Nmap <span class="badge badge-enova">E-Nova</span></h3>
+                <p><strong>Contexte :</strong> Sécurité et audit du réseau de l'atelier</p>
+                <p><strong>Objectifs :</strong></p>
+                <ul>
+                    <li>Détecter les appareils inconnus sur le réseau</li>
+                    <li>Vérifier l'état des PC en reconditionnement (ports suspects)</li>
+                    <li>Maintenir un inventaire des équipements connectés</li>
+                </ul>
+                <p><strong>Technologies :</strong></p>
+                <div>
+                    <span class="tech-tag">Nmap</span>
+                    <span class="tech-tag">Sécurité réseau</span>
+                    <span class="tech-tag">Audit</span>
+                </div>
+                <a href="pdf/Scan_Reseau_Nmap_E-Nova.pdf" class="pdf-btn" download>📥 Télécharger le PDF</a>
+            </div>
+        </div>
+        <div id="e6" class="section">
+            <h1>🛠️ Épreuve E6 - Parcours de professionnalisation</h1>
+            
+            <div class="context-box">
+                <h3>📌 Présentation de l'épreuve</h3>
+                <p>L'épreuve E6 est une <strong>épreuve pratique</strong> portant sur le parcours de professionnalisation du candidat. 
+                Elle évalue la capacité à administrer des solutions d'infrastructure et à répondre aux besoins des utilisateurs 
+                à travers des situations professionnelles concrètes rencontrées en formation et en entreprise.</p>
+            </div>
+
+            <h2>🖥️ Environnement technique</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>Active Directory</h3>
+                    <p>Gestion des utilisateurs, groupes, unités organisationnelles et stratégies de groupe (GPO)</p>
+                </div>
+                <div class="info-card">
+                    <h3>GLPI</h3>
+                    <p>Gestion du parc informatique, ticketing, inventaire automatique et suivi des incidents</p>
+                </div>
+            </div>
+
+            <h2>📋 Situations professionnelles</h2>
+
+            <!-- RP1 - Théme 7 Stagiaires - Environnement de travail bridé -->
+            <div class="project-card stadium">
+                <h3>🔒 RP1 — Environnement de travail bridé (Stagiaires) <span class="badge badge-stadium">StadiumCompany</span></h3>
+                <p><strong>Contexte :</strong> Théme 7 — Accueil de 50 stagiaires/saisonniers sur postes partagés. Mise en place d'un environnement entièrement cloisonné et restrictif.</p>
+                <p><strong>Activités réalisées :</strong></p>
+                <ul>
+                    <li>Création automatisée des 50 comptes Active Directory via script PowerShell (Import-Csv, New-ADUser, Windows Forms GUI)</li>
+                    <li>Configuration du scope DHCP "Scope-Stagiaires" sur le VLAN 50 (172.20.5.0/24, bail 8h)</li>
+                    <li>Déploiement d'une GPO Loopback en mode Remplacer : restriction lecteur C:, panneau de configuration, invite de commandes, liste blanche d'applications</li>
+                    <li>Mappage automatique du lecteur T: vers le partage \\HERMES\Travail_Temp</li>
+                    <li>Création du SSID Wi-Fi "Intern-Wifi" sur borne Cisco Aironet (WPA2-Enterprise + RADIUS) associé au VLAN 50</li>
+                    <li>Réinitialisation et configuration de la borne via console série (PuTTY/COM3)</li>
+                </ul>
+                <p><strong>Technologies :</strong></p>
+                <div>
+                    <span class="tech-tag">Windows Server 2022</span>
+                    <span class="tech-tag">Active Directory</span>
+                    <span class="tech-tag">PowerShell</span>
+                    <span class="tech-tag">DHCP</span>
+                    <span class="tech-tag">GPO Loopback</span>
+                    <span class="tech-tag">VLAN 50</span>
+                    <span class="tech-tag">Cisco Aironet</span>
+                    <span class="tech-tag">WPA2-Enterprise</span>
+                </div>
+                <a href="pdf/E6_RP1_Theme7_Stagiaires.pdf" class="pdf-btn" download>📄 Télécharger le PDF</a>
+            </div>
+
+            <!-- RP2 - Théme 7 Stagiaires - Conformité logicielle et suivi -->
+            <div class="project-card stadium">
+                <h3>📊 RP2 — Conformité logicielle et suivi (Stagiaires) <span class="badge badge-stadium">StadiumCompany</span></h3>
+                <p><strong>Contexte :</strong> Théme 7 — Supervision et gestion du parc informatique des 50 stagiaires : conformité logicielle, support niveau 1, communication collective, surveillance Wi-Fi.</p>
+                <p><strong>Activités réalisées :</strong></p>
+                <ul>
+                    <li>Déploiement de l'agent OCS Inventory NG via GPO MSI sur tous les postes stagiaires</li>
+                    <li>Configuration d'une blacklist logicielle OCS (jeux, P2P, VPN, Tor) avec génération automatique de tickets GLPI</li>
+                    <li>Intégration GLPI ↔ Active Directory via LDAP (BaseDN, compte de liaison svc-glpi, filtre GRP-Stagiaires)</li>
+                    <li>Résolution d'un problème d'authentification AuthLDAP via débogage du php-errors.log</li>
+                    <li>Ouverture du portail GLPI Self-Service aux stagiaires (catalogue de services, suivi de tickets)</li>
+                    <li>Configuration du collecteur de courriels IMAP support@xmail.stadiumcompany.local</li>
+                    <li>Administration Zimbra 9.0.0 : domaine xmail, authentification LDAP, provisionnement automatique (zimbraAutoProvAttrMap)</li>
+                    <li>Création de la liste de diffusion stagiaires@xmail via zmprov (cdl/adlm/gdl)</li>
+                    <li>Supervision Nagios Core des bornes "Intern-Wifi" : check_ping et check_snmp avec PNP4Nagios</li>
+                </ul>
+                <p><strong>Technologies :</strong></p>
+                <div>
+                    <span class="tech-tag">OCS Inventory NG</span>
+                    <span class="tech-tag">GLPI</span>
+                    <span class="tech-tag">LDAP</span>
+                    <span class="tech-tag">Active Directory</span>
+                    <span class="tech-tag">Zimbra 9.0.0</span>
+                    <span class="tech-tag">zmprov</span>
+                    <span class="tech-tag">Nagios Core</span>
+                    <span class="tech-tag">SNMP</span>
+                    <span class="tech-tag">IMAP</span>
+                </div>
+                <a href="pdf/E6_RP2_Theme7_Stagiaires.pdf" class="pdf-btn" download>📄 Télécharger le PDF</a>
+            </div>
+        </div>
+
+        <!-- Section Veille Technologique -->
+        <div id="veille" class="section">
+            <h1>📡 Veille Technologique</h1>
+            
+            <h2>🤖 Sujet : L'Intelligence Artificielle et son impact sur l'infrastructure IT</h2>
+            <p>Dans le cadre du BTS SIO, j'ai choisi de réaliser ma veille technologique sur l'intelligence artificielle (IA) et son impact croissant sur l'administration des systèmes et réseaux, ainsi que sur la cybersécurité.</p>
+
+            <div class="context-box">
+                <h3>🤖 L'IA au service de l'infrastructure IT</h3>
+                <ul>
+                    <li><strong>Automatisation</strong> : L'IA permet d'automatiser les tâches d'administration système (déploiement, monitoring, gestion des incidents)</li>
+                    <li><strong>Détection des menaces</strong> : Les solutions basées sur l'IA (EDR, XDR) détectent les comportements anormaux en temps réel</li>
+                    <li><strong>Assistance au diagnostic</strong> : Les outils IA aident au troubleshooting réseau et système (analyse de logs, prédiction de pannes)</li>
+                    <li><strong>Chatbots et support</strong> : Intégration de l'IA dans les outils de ticketing (GLPI, ServiceNow) pour le support de niveau 1</li>
+                    <li><strong>Génération de scripts</strong> : Utilisation de l'IA pour générer et optimiser des scripts PowerShell, Bash et Python</li>
+                </ul>
+            </div>
+
+            <div class="context-box">
+                <h3>📊 Chiffres clés - L'IA en entreprise</h3>
+                <ul>
+                    <li><strong>72%</strong> des entreprises ont adopté l'IA dans au moins un domaine en 2024</li>
+                    <li><strong>Cybersécurité</strong> : l'IA est utilisée pour détecter les menaces dans 60% des grandes entreprises</li>
+                    <li><strong>Automatisation IT</strong> : réduction de 30 à 50% du temps passé sur les tâches répétitives</li>
+                    <li><strong>Support utilisateur</strong> : les chatbots IA traitent jusqu'à 40% des tickets de niveau 1</li>
+                </ul>
+            </div>
+
+            <h2>🛠️ Outils de Veille Utilisés</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>ANSSI / CERT-FR</h3>
+                    <p>Alertes officielles et recommandations de sécurité</p>
+                </div>
+                <div class="info-card">
+                    <h3>Feedly</h3>
+                    <p>Agrégation de flux RSS (LeMagIT, ZDNet, Zataz)</p>
+                </div>
+                <div class="info-card">
+                    <h3>Google Alerts</h3>
+                    <p>Alertes sur "IA infrastructure IT", "intelligence artificielle cybersécurité"</p>
+                </div>
+                <div class="info-card">
+                    <h3>Twitter/X</h3>
+                    <p>@ANSSI_FR, @ABORLA, experts cyber et IA</p>
+                </div>
+            </div>
+
+            <h2>📄 Documentation Complète</h2>
+            <div class="project-card">
+                <h3>🤖 Veille Technologique - L'IA dans l'administration système et réseau</h3>
+                <p>Document complet comprenant :</p>
+                <ul>
+                    <li>Définition et types d'Intelligence Artificielle</li>
+                    <li>L'IA dans l'administration système et réseau (automatisation, monitoring, AIOps)</li>
+                    <li>L'IA et la cybersécurité (EDR, XDR, détection de menaces)</li>
+                    <li>L'IA dans les outils de ticketing et support (chatbots, GLPI, ServiceNow)</li>
+                    <li>Chiffres clés et tendances du marché</li>
+                    <li>Enjeux éthiques et limites de l'IA en informatique</li>
+                    <li>Lien avec le BTS SIO SISR</li>
+                </ul>
+                <a href="pdf/Veille_Technologique_Intelligence_Artificielle.pdf" class="pdf-btn" download>📄 Télécharger le PDF complet</a>
+            </div>
+        </div>
+
+        <!-- Section Compétences -->
+        <div id="competences" class="section">
+            <h1>💼 Tableau de Synthèse des Compétences</h1>
+            
+            <h2>🔧 Compétences Techniques</h2>
+            <table class="competence-table">
+                <thead>
+                    <tr>
+                        <th>Compétence</th>
+                        <th>Niveau</th>
+                        <th>✓</th>
+                        <th>Contexte</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Administration Windows Server</td><td>Avancé</td><td><span class="check">✓</span></td><td>E-Nova + Formation</td></tr>
+                    <tr><td>Administration Linux (Debian/Ubuntu)</td><td>Intermédiaire</td><td><span class="check">✓</span></td><td>Formation</td></tr>
+                    <tr><td>Active Directory / GPO</td><td>Avancé</td><td><span class="check">✓</span></td><td>Formation StadiumCompany</td></tr>
+                    <tr><td>Réseaux (TCP/IP, VLAN, VPN)</td><td>Avancé</td><td><span class="check">✓</span></td><td>E-Nova + Formation</td></tr>
+                    <tr><td>Configuration Cisco (Switch/Routeur)</td><td>Intermédiaire</td><td><span class="check">✓</span></td><td>Formation</td></tr>
+                    <tr><td>Virtualisation (VMware/Hyper-V)</td><td>Avancé</td><td><span class="check">✓</span></td><td>E-Nova + Formation</td></tr>
+                    <tr><td>Scripting (PowerShell/Bash)</td><td>Intermédiaire</td><td><span class="check">✓</span></td><td>Formation</td></tr>
+                    <tr><td>Cybersécurité (Pare-feu, IDS)</td><td>Intermédiaire</td><td><span class="check">✓</span></td><td>Veille + Formation</td></tr>
+                    <tr><td>GLPI / Helpdesk</td><td>Avancé</td><td><span class="check">✓</span></td><td>Formation StadiumCompany</td></tr>
+                </tbody>
+            </table>
+
+            <h2>🤝 Compétences Transversales</h2>
+            <table class="competence-table">
+                <thead>
+                    <tr>
+                        <th>Compétence</th>
+                        <th>Niveau</th>
+                        <th>✓</th>
+                        <th>Contexte</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Documentation technique</td><td>Avancé</td><td><span class="check">✓</span></td><td>Tous projets</td></tr>
+                    <tr><td>Support utilisateurs / SAV</td><td>Avancé</td><td><span class="check">✓</span></td><td>E-Nova</td></tr>
+                    <tr><td>Travail en équipe</td><td>Avancé</td><td><span class="check">✓</span></td><td>E-Nova + Formation</td></tr>
+                    <tr><td>Veille technologique</td><td>Avancé</td><td><span class="check">✓</span></td><td>Ransomwares/Cyber</td></tr>
+                    <tr><td>Communication professionnelle</td><td>Avancé</td><td><span class="check">✓</span></td><td>E-Nova</td></tr>
+                    <tr><td>Analyse et résolution de problèmes</td><td>Avancé</td><td><span class="check">✓</span></td><td>SAV E-Nova</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Section Contact -->
+        <div id="contact" class="section">
+            <h1>📬 Me Contacter</h1>
+            
+            <p style="margin-bottom: 2rem; font-size: 1.1rem;">
+                Je suis actuellement en 2ème année de BTS SIO option SISR en alternance chez E-Nova.
+            </p>
+
+            <div class="info-grid" style="margin-bottom: 2rem;">
+                <div class="info-card">
+                    <h3>📧 Email</h3>
+                    <p><a href="/cdn-cgi/l/email-protection#eb878a9e998e859fc5839e989f8285ab8e938a869b878ec5888486" style="color: #667eea;"><span class="__cf_email__" data-cfemail="472b263235222933692f3234332e2907223f262a372b226924282a">[email&#160;protected]</span></a></p>
+                </div>
+                <div class="info-card">
+                    <h3>📱 Téléphone</h3>
+                    <p><a href="tel:0768648993" style="color: #667eea;">07 68 64 89 93</a></p>
+                </div>
+                <div class="info-card">
+                    <h3>💼 LinkedIn</h3>
+                    <p><a href="#" style="color: #667eea;">Laurent HUSTIN</a></p>
+                </div>
+                <div class="info-card">
+                    <h3>🏢 Entreprise</h3>
+                    <p>E-Nova (Alternance)</p>
+                </div>
+            </div>
+
+            <h2>📝 Formulaire de Contact</h2>
+            <form class="contact-form" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label for="name">Nom complet *</label>
+                    <input type="text" id="name" name="name" required placeholder="Ex: Jean Dupont">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required placeholder="Ex: jean.dupont@exemple.fr">
+                </div>
+                <div class="form-group">
+                    <label for="subject">Objet *</label>
+                    <input type="text" id="subject" name="subject" required placeholder="Ex: Opportunité, Question...">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message *</label>
+                    <textarea id="message" name="message" required placeholder="Votre message..."></textarea>
+               
